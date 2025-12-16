@@ -120,7 +120,9 @@ package CASE_Model_Transformation {
    	   in curr : Collections::Set;
    	   return : Collections::Set;
    	  
-   	   p_reach : Collections::Set = set_builder(prev_reach(curr), {in c; has_mitigation_type(c, "CASE_Properties::Filtering")}, {in c; c}); 
+   	   // collect expression (KerML Standard 7.4.9.3)
+   	   p_reach : Collections::Set = prev_reach(curr).?{in c; has_mitigation_type(c, "CASE_Properties::Filtering")} ;
+   	   //= set_builder(prev_reach(curr), {in c; has_mitigation_type(c, "CASE_Properties::Filtering")}, {in c; c}); 
 	   prev : Collections::Set = union(curr, p_reach); 
 	   if prev == curr ? curr else recursive_backwards_filter_reach(prev)
 	}

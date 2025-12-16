@@ -54,7 +54,7 @@ package MC {
 		part proc_hw : MC_Proc;
 		part mem_hw : MC_Mem;
 		part bus_hw : MC_Bus;
-		part sw : SW::SW_sel4;
+		part sw : SW::SW_seL4;
 	
 		connection c1 : AADL::PortConnection
 			connect radioRecv to radio_hw.recvIn;
@@ -67,14 +67,15 @@ package MC {
 		
 		// unsure how to implement bus accesses
 		
-		connection apb : Deployment_Properties::Actual_Processor_Binding
-			connect sw to proc_hw; 
-		connection amb : Deployment_Properties::Actual_Memory_Binding
-			connect sw to mem_hw;
+		allocation apb : Deployment_Properties::Actual_Processor_Binding 
+		allocate sw to proc_hw; 
+		//connection amb : Deployment_Properties::Actual_Memory_Binding
+		//	connect sw to mem_hw;
 			
-		#argue constraint idk : MissionComputer_cyber_resilient {
-			in redefines sys = this;
+		#argue constraint {
+			MissionComputer_cyber_resilient()
 		}
+			//# argue statement goes here BUT, this is a definition of a system
 	}
 	
 	#goal constraint def MissionComputer_cyber_resilient {

@@ -11,4 +11,6 @@ package Case_Properties {
     }
     attribute def Component_Impl :> ScalarValues::String;
     attribute def Component_Spec :> Collections::List;
+    
+    
 }
